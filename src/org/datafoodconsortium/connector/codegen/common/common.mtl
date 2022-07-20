@@ -1,0 +1,86 @@
+[comment encoding = UTF-8 /]
+[module common('http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[query public createGeneralization(aClass: Class): Boolean
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'createGeneralization(org.eclipse.uml2.uml.Class)', Sequence{aClass})
+/]
+
+[query public getTypeName(aType: Type) : String
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getTypeName(org.eclipse.uml2.uml.Type)', Sequence{aType})
+/]
+
+[query public isConstructor(o: Operation): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isConstructor(org.eclipse.uml2.uml.Operation)', Sequence{o})
+/]
+
+[query public isInitializer(p: Parameter): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isInitializer(org.eclipse.uml2.uml.Parameter)', Sequence{p})
+/]
+
+[query public isInitializerParent(p: Parameter): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isInitializerParent(org.eclipse.uml2.uml.Parameter)', Sequence{p})
+/]
+
+[query public isGetter(o: Operation): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isGetter(org.eclipse.uml2.uml.Operation)', Sequence{o})
+/]
+
+[query public isSetter(o: Operation): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isSetter(org.eclipse.uml2.uml.Operation)', Sequence{o})
+/]
+
+[query public isAdder(o: Operation): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isAdder(org.eclipse.uml2.uml.Operation)', Sequence{o})
+/]
+
+[query public isRemover(o: Operation): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isRemover(org.eclipse.uml2.uml.Operation)', Sequence{o})
+/]
+
+[query public isSemantic(e: Element): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isSemantic(org.eclipse.uml2.uml.Element)', Sequence{e})
+/]
+
+[query public isExternal(e: Element): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isExternal(org.eclipse.uml2.uml.Element)', Sequence{e})
+/]
+
+[query public isPrimitive(t: Type): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isPrimitive(org.eclipse.uml2.uml.Type)', Sequence{t})
+/]
+
+[query public hasStereotype(e: Element, s: String): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'hasStereotype(org.eclipse.uml2.uml.Element, java.lang.String)', Sequence{e, s})
+/]
+
+[query public getAttributeForStereotypedOperation(c: Class, s: String, o: String): String 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getAttributeForStereotypedOperation(org.eclipse.uml2.uml.Class, java.lang.String, java.lang.String)', Sequence{c, s, o})
+/]
+
+[query public getConstructorUninitializedAttributes(o: Operation): Sequence(Property)
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getConstructorUninitializedAttributes(org.eclipse.uml2.uml.Operation)', Sequence{o})
+/]
+
+[query public getConstructor(c: Class, o: Operation): String 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getConstructor(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Operation)', Sequence{c, o})
+/]
+
+[query public getGetter(c: Class, o: Operation): String 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getGetter(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Operation)', Sequence{c, o})
+/]
+
+[query public getSetter(c: Class, o: Operation): String 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getSetter(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Operation)', Sequence{c, o})
+/]
+
+[query public getAdder(c: Class, o: Operation): String 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getAdder(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Operation)', Sequence{c, o})
+/]
+
+[query public getRemover(c: Class, o: Operation): String 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getRemover(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Operation)', Sequence{c, o})
+/]
+
+[query public getGetter(p: Property): String 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'getGetter(org.eclipse.uml2.uml.Property)', Sequence{p})
+/]
