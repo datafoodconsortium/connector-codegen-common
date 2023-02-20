@@ -41,6 +41,10 @@
 	= invoke('org.datafoodconsortium.codegen.common.Common', 'isSemantic(org.eclipse.uml2.uml.Element)', Sequence{e})
 /]
 
+[query public isBlankNode(e: Element): Boolean 
+	= invoke('org.datafoodconsortium.codegen.common.Common', 'isBlankNode(org.eclipse.uml2.uml.Element)', Sequence{e})
+/]
+
 [query public isExternal(e: Element): Boolean 
 	= invoke('org.datafoodconsortium.codegen.common.Common', 'isExternal(org.eclipse.uml2.uml.Element)', Sequence{e})
 /]

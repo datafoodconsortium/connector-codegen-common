@@ -19,7 +19,7 @@ public class Logger implements IAcceleoTextGenerationListener {
 
 	@Override
 	public void fileGenerated(AcceleoTextGenerationEvent event) {
-		System.out.println(event.getText() + " file generated");
+		System.out.println("Generated " + event.getText() + " file");
 		this.generatedFiles++;
 	}
 

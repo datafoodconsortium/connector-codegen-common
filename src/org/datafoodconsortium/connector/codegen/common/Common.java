@@ -11,7 +11,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Class;
+import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Interface;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Package;
@@ -40,6 +42,7 @@ public class Common {
 		public static final String ADDER = "adder";
 		public static final String REMOVER = "remover";
 		public static final String SEMANTIC = "semantic";
+		public static final String BLANK_NODE = "blankNode";
 		public static final String EXTERNAL = "external";
 	}
 	
@@ -149,6 +152,10 @@ public class Common {
 		return hasStereotype(element, Stereotypes.SEMANTIC);
 	}
 	
+	public boolean isBlankNode(Element element) {
+		return hasStereotype(element, Stereotypes.BLANK_NODE);
+	}
+	
 	public boolean isExternal(Element element) {
 		return hasStereotype(element, Stereotypes.EXTERNAL);
 	}
@@ -254,4 +261,27 @@ public class Common {
 
 		return properties;
 	}
+	
+	public List<Operation> getUnimplementedOperations(Classifier aClass) {
+		List<Operation> implementedOperations = new ArrayList<Operation>();
+		List<Operation> unimplementedOperations = new ArrayList<Operation>();
+		List<Classifier> generals = aClass.getGenerals();
+		
+		for (Interface anInterface: aClass.allRealizedInterfaces())
+			unimplementedOperations.addAll(anInterface.getAllOperations());
+		
+		if (!generals.isEmpty()) {
+			Classifier baseClass = generals.get(0);
+			
+			for (Interface anInterface: baseClass.allRealizedInterfaces())
+				implementedOperations.addAll(anInterface.getAllOperations());
+			
+			implementedOperations.addAll(getUnimplementedOperations(baseClass)); // recursive call
+		}
+		
+		unimplementedOperations.removeAll(implementedOperations);
+	
+		return unimplementedOperations;
+	}
+	
 }
