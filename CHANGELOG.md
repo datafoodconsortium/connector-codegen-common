@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2027-07-27
+
 ### Added
 
-- Support BlankNode
-- getUnimplementedOperations(Classifier aClass)
+- Can get setter and adder for a property.
+- Get property of adder, getter and setter.
+- Support BlankNode.
+- getUnimplementedOperations(Classifier aClass).
 
 ## [1.0.0] - 2022-07-20
 
@@ -18,5 +22,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[unreleased]: https://github.com/datafoodconsortium/connector-codegen-common/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/datafoodconsortium/connector-codegen-common/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/datafoodconsortium/connector-codegen-common/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/datafoodconsortium/connector-codegen-common/releases/tag/v1.0.0

@@ -178,11 +178,33 @@ public class Common {
 				try {
 					result = element.getValue(stereotype, attributeName);
 				} catch(Exception e) {
-					
+					System.err.println(e.getMessage());
 				}
 			}
 		}
 		return result;
+	}
+	
+	public Operation getSetter(Parameter parameter) {
+		Property property = (Property) this.getStereotypeValue(parameter, Stereotypes.INITIALIZER, "property");
+		
+		if (property != null) {
+			Operation setter = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY, "setter");
+			return setter;
+		}
+		
+		return null;
+	}
+	
+	public Operation getAdder(Parameter parameter) {
+		Property property = (Property) this.getStereotypeValue(parameter, Stereotypes.INITIALIZER, "property");
+		
+		if (property != null) {
+			Operation adder = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY_MULTIPLE, "adder");
+			return adder;
+		}
+		
+		return null;
 	}
 	
 	public String getGetter(Property property) {
@@ -209,6 +231,45 @@ public class Common {
 	
 	public String getAdder(Class aClass, Operation operation) {
 		return getAttributeForStereotypedOperation(aClass, Stereotypes.ADDER, operation.getName());
+	}
+	
+	public Property getPropertyOfAdder(Class aClass, Operation o) {
+		for (Property property : aClass.getOwnedAttributes()) {
+			Operation setter = null;
+			if (this.isProperty(property))
+				setter = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY, "adder");
+			else if (this.isPropertyMultiple(property))
+				setter = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY_MULTIPLE, "adder");
+			if (o.equals(setter))
+				return property;
+		}
+		return null;
+	}
+	
+	public Property getPropertyOfGetter(Class aClass, Operation o) {
+		for (Property property : aClass.getOwnedAttributes()) {
+			Operation setter = null;
+			if (this.isProperty(property))
+				setter = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY, "getter");
+			else if (this.isPropertyMultiple(property))
+				setter = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY_MULTIPLE, "getter");
+			if (o.equals(setter))
+				return property;
+		}
+		return null;
+	}
+	
+	public Property getPropertyOfSetter(Class aClass, Operation o) {
+		for (Property property : aClass.getOwnedAttributes()) {
+			Operation setter = null;
+			if (this.isProperty(property))
+				setter = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY, "setter");
+			else if (this.isPropertyMultiple(property))
+				setter = (Operation) this.getStereotypeValue(property, Stereotypes.PROPERTY_MULTIPLE, "setter");
+			if (o.equals(setter))
+				return property;
+		}
+		return null;
 	}
 	
 	public String getRemover(Class aClass, Operation operation) {
