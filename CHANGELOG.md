@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Get adder passing a property.
+- Get setter passing a property.
+
 ## [1.1.0] - 2027-07-27
 
 ### Added

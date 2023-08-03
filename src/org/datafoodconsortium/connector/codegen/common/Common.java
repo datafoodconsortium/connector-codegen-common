@@ -170,7 +170,7 @@ public class Common {
 		return false;
 	}
 	
-	public Object getStereotypeValue(Element element, String stereotypeName, String attributeName) {
+	public Object getStereotypeValue(NamedElement element, String stereotypeName, String attributeName) {
 		Object result = null;
 		List<Stereotype> stereotypes = element.getAppliedStereotypes();
 		for (Stereotype stereotype : stereotypes) {
@@ -178,7 +178,7 @@ public class Common {
 				try {
 					result = element.getValue(stereotype, attributeName);
 				} catch(Exception e) {
-					System.err.println(e.getMessage());
+					System.err.println("Failed to getStereotypeValue of stereotype " + stereotypeName + " for " + element.getName());
 				}
 			}
 		}
@@ -227,6 +227,26 @@ public class Common {
 	
 	public String getSetter(Class aClass, Operation operation) {
 		return getAttributeForStereotypedOperation(aClass, Stereotypes.SETTER, operation.getName());
+	}
+	
+	public Operation getAdder(Property property) {
+		String propertyType = isProperty(property)? Stereotypes.PROPERTY : Stereotypes.PROPERTY_MULTIPLE;
+		Object result = getStereotypeValue(property, propertyType, Stereotypes.ADDER);
+		if (result == null) {
+			NamedElement owner = (NamedElement) property.getOwner();
+			System.err.println("Failed to get adder of property " + owner.getName() + "::" + property.getName());
+		}
+		return result != null ? (Operation) result: null;
+	}
+	
+	public Operation getSetter(Property property) {
+		String propertyType = isProperty(property)? Stereotypes.PROPERTY : Stereotypes.PROPERTY_MULTIPLE;
+		Object result = getStereotypeValue(property, propertyType, Stereotypes.SETTER);
+		if (result == null) {
+			NamedElement owner = (NamedElement) property.getOwner();
+			System.err.println("Failed to get setter of property " + owner.getName() + "::" + property.getName());
+		}
+		return result != null ? (Operation) result: null;
 	}
 	
 	public String getAdder(Class aClass, Operation operation) {
